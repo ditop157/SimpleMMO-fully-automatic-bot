@@ -17,30 +17,7 @@ NUM_classes = 40
 CLASS_NAMES = ["banana", "book", "bread", "candy cane", "candy corn", "cannon", "carrot", "cheese", "cherry", "chest piece", "clock", "diamond",
                "egg", "fire", "fish", "frog", "ghost", "grapes", "gun", "hat", "helmet", "house", "key", "lemon", "mushroom", "necklace", "pear", 
                "pepper", "pie", "piece of meat", "pineapple", "pretzel", "pumpkin", "rose", "strawberry", "treasure chest", "watermelon", "empty bottle", "orange", "crown"]
-               
-
-def preprocessing_image(img, transform):
-import numpy as np
-import torch
-import torch.nn as nn
-import utils
-from model.resnet import resnet34
-import torchvision.transforms as transforms
-import os
-import time
-import matplotlib.pyplot as plt
-from torch.autograd import Variable
-from PIL import Image
-
-model_dir = './output/model.pt'
-
-DEVICE = torch.device("cuda:%d" % 0)
-NUM_classes = 40
-
-CLASS_NAMES = ["banana", "book", "bread", "candy cane", "candy corn", "cannon", "carrot", "cheese", "cherry", "chest piece", "clock", "diamond",
-               "egg", "fire", "fish", "frog", "ghost", "grapes", "gun", "hat", "helmet", "house", "key", "lemon", "mushroom", "necklace", "pear", 
-               "pepper", "pie", "piece of meat", "pineapple", "pretzel", "pumpkin", "rose", "strawberry", "treasure chest", "watermelon", "empty bottle", "orange", "crown"]
-               
+                           
 
 def preprocessing_image(img, transform):
 
