@@ -17,6 +17,9 @@ import torch
 import torch.nn as nn
 import verifier
 import cv2
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 TEMP_PATH = "./temporary"
 UNKNOWN_IMAGE_PATH = "./unknown"
@@ -63,7 +66,7 @@ def take_step(driver):
     assert "Travel" in driver.title
 
     while True:
-        element = driver.find_element(By.ID, "step_button")
+        element = driver.find_element(By.XPATH, "//button[contains(text(), 'Take a step')]")
         element.click()
         time.sleep(2)
         not_machine(driver)
@@ -338,7 +341,9 @@ def not_machine3(driver):
 
 def attack(driver):
     try:
+        #element = wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Attack")))
         element = driver.find_element(By.LINK_TEXT, "Attack")
+
         element.click()
         attack_mob(driver)
     except NoSuchElementException:
@@ -388,11 +393,16 @@ def attack_mob(driver):
 
 
 
-if __name__ == "__main__":
+def main_function():
     main()
 
     driver = webdriver.Chrome(chrome_options=chrome_options)
     return driver
+
+if __name__ == "__main__":
+    result = main_function()
+    # Do something with the result
+
     # assert "No results found." not in driver.page_source
     # driver.close()
 
@@ -406,7 +416,7 @@ def take_step(driver):
     assert "Travel" in driver.title
 
     while True:
-        element = driver.find_element(By.ID, "step_button")
+        element = driver.find_element(By.XPATH, "//button[contains(text(), 'Take a step')]")
         element.click()
         time.sleep(2)
         not_machine(driver)
@@ -620,9 +630,11 @@ def not_machine3(driver):
 
 def attack(driver):
     try:
-        element = driver.find_element("xpath",
-            "/html/body/div[1]/div[3]/main/div[2]/div/div[2]/div/div/div[6]/div[1]/div/div[2]/div/span[2]/a[1]"
-        )
+        #element = driver.find_element("xpath",
+        #    "/html/body/div[1]/div[3]/main/div[2]/div/div[2]/div/div/div[6]/div[1]/div/div[2]/div/span[2]/a[1]"
+        #)
+        wait = WebDriverWait(driver, 3)
+        element = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/main/div[2]/div/div[2]/div/div/div[6]/div[1]/div/div[2]/div/span[2]/a[1]")))
         element.click()
         attack_mob(driver)
     except NoSuchElementException:
